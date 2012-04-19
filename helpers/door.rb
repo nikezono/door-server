@@ -10,9 +10,13 @@ class Door
   end
   
   def open
-    if Net::HTTP.start(@url.host, @url.port).post('/', '0').kind_of? Net::HTTPOK
-      sleep 2
-      return Net::HTTP.start(@url.host, @url.port).post('/', '180').kind_of? Net::HTTPOK
+    begin
+      if Net::HTTP.start(@url.host, @url.port).post('/', '0').kind_of? Net::HTTPOK
+        sleep 2
+        return Net::HTTP.start(@url.host, @url.port).post('/', '180').kind_of? Net::HTTPOK
+      end
+    rescue => e
+      STDERR.puts e
     end
     return false
   end
