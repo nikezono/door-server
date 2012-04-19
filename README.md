@@ -33,3 +33,11 @@ open [http://localhost:8080](http://localhost:8080)
 Deploy
 ------
 use Passenger with "config.ru"
+
+
+API
+---
+
+open door
+
+    % curl -d "" http://localhost:8080

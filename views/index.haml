@@ -8,3 +8,8 @@
 
 %div
   %input{:id => 'btn_open', :type => 'button', :value => 'open'}
+%div
+  %h2 Open API
+  %ul
+    %li HTTP-POST to #{app_root}/open
+    %li % curl -d "" #{app_root}/open
