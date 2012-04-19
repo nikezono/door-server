@@ -1,0 +1,10 @@
+- content_for :title do
+  = @title
+
+- content_for :head do
+  :javascript
+    var app_root = "#{app_root}";
+  %script{:type => 'text/javascript', :src => "#{app_root}/js/main.js"}
+
+%div
+  %input{:id => 'btn_open', :type => 'button', :value => 'open'}
