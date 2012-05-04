@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" /> 
+<title>open the door</title>
+
+<script src='js/goldfish.js' type='application/javascript'></script>
+<script src='js/jquery.js' type='application/javascript'></script>
+<script src = 'js/jQueryRotate.2.1.js' type = 'application/javascript'></script>
+
+<style type="text/css">
+<!--
+-->
+</style>
+</head>
+
+<body>
+
+  <p>status:<span id="status">---</span>  angle:<span id="angle">---</span></p>
+
+<img src = "images/sum.png" alt = "a rotating image" style = "width : 200px; height : 200px" id = 'sum'  />
+<img src = "images/turn.png" alt = "a rotating image" style = "width : 30px; height : 200px; position: relative; top: 0; left: -118;" id = 'turn'  />
+
+<script type="text/javascript">
+
+$('body').css('background-color','#99cc99');
+
+//openmethod
+var openp = false;
+
+function open(){
+  if(!openp){
+    $.post("http://masui.sfc.keio.ac.jp/door/open");
+  }
+  openp = true;
+}
+
+
+//loopmethod
+
+var angle = 0;
+var sc = setInterval(
+	function (){
+
+	gyro = goldfish.gyroscope();
+	angle -= gyro.z * 3;
+    	if(angle > 89) angle = 90;
+    	if(angle < 1) angle = 0;
+	if(!openp){
+    		if(angle == 90){
+		        open();
+
+		        goldfish.exit();
+			//clearInterval(sc);//‚±‚Ì‚â‚è•û‚Í³‚µ‚­‚È‚¢‚©
+	}
+	}
+	$("#angle").text(angle);
+	$("#turn").rotate(parseInt(angle));
+  	}, 50
+);
+
+
+</script>
+</body>
+</html>
+
